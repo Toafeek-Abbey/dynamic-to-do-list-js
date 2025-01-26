@@ -3,8 +3,13 @@ document.addEventListener('DOMContentLoaded', function () {
          const addButton = document.getElementById('add-task-btn')
          const taskInput = document.getElementById('task-input')
          const taskList = document.getElementById('task-list')
+         function loadTasks() {
+                  const storedTasks = JSON.parse(localStorage.getItem('tasks') || '[]');
+                  storedTasks.forEach(taskText => addTask(taskText, false)); 
+         }
+         
 
-         function addTask() {
+         function addTask(taskText, save = true) {
 
                   var taskText = taskInput.value.trim()
                   if (taskText !== "" ) {
@@ -29,7 +34,16 @@ document.addEventListener('DOMContentLoaded', function () {
                          addTask()
                       }
                   )
+                    if (save) {
+                      const storedTasks = JSON.parse(localStorage.getItem('tasks') || '[]');
+                      storedTasks.push(taskText);
+                      localStorage.setItem('tasks', JSON.stringify(storedTasks));
+                    }
          }
-          document.addEventListener('DOMContentLoaded', addTask)
+         
+          document.addEventListener('DOMContentLoaded', ()=>{
+                   loadTasks();
+                   addTask()
+          })
   
 })
