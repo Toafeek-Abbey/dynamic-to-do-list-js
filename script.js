@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
                   }
                   addButton.addEventListener("click", addTask)
                   taskInput.addEventListener('keypress',
-                      if (event.key == ) {
+                      if (event.key == 'ENter') {
                          addTask()
                       }
                   )
